@@ -1,0 +1,172 @@
+{
+    "Title": "On the Subject of Bomb Defusing",
+    "Description": "<p>You are in a room with a bomb and you must defuse it.</p><p>To do so, you must defuse 3 different nodes. You have 3 strikes.</p><p>Each time you fail, you gain a strike and must do the node over again.</p><p>Instructions to solve each node is posted on their respective manuals.</p>",
+    "Credits": "Created by Aiden Le (aiqle@ucsc.edu).",
+    "InitialLocation": "BombPanel",
+    "Locations": {
+        "BombPanel": {
+            "Body": "<h2>Bomb Panel</h2>",
+            "Choices": [
+                {
+                    "Text": "Wires",
+                    "Target": "Wires"
+                },
+                {
+                    "Text": "Keypad",
+                    "Target": "Keypad"
+                },
+                {
+                    "Text": "Button",
+                    "Target": "Button"
+                },
+                {
+                    "Text": "Defuse Bomb",
+                    "Target": "Notcompleted"
+                }
+
+            ]
+        },
+        "Wires": {
+            "Body": "<h3>Wire Node</h3><p>If there are no Red wires, cut the second wire.</p><p>Otherwise, if the last wire is White, cut the last wire.</p><p>Otherwise, if there is more than one Blue wire, cut the last Blue wire.</p><p>Otherwise, cut the last wire.</p>",
+            "Choices": [
+                {"Text": "Red", "Target": "Wires1", "Strike": true},
+                {"Text": "White", "Target": "Wires1", "Strike": true},
+                {"Text": "White", "Target": "Wires2"}
+            ]
+        },
+        "Wires1": {
+            "Body": "<h3>Try Again</h3>",
+            "Choices": [
+                {"Text": "Red", "Target": "Wires1", "Strike": true},
+                {"Text": "White", "Target": "Wires1", "Strike": true},
+                {"Text": "White", "Target": "Wires2"}
+            ]
+        },
+        "Wires2": {
+            "Body": "<p>If there is more than one Red wire, cut the last Red wire.</p><p>Otherwise, if the last wire is Yellow and there are no Red wires, cut the first wire.</p><p>Otherwise, if there is exactly one Blue wire, cut the first wire.</p><p>Otherwise, if there is more than one Yellow wire, cut the last wire.</p><p>Otherwise, cut the second wire.</p>",
+            "Choices": [
+                {"Text": "Blue", "Target": "Wires3"},
+                {"Text": "Red", "Target": "Wires2again", "Strike": true},
+                {"Text": "White", "Target": "Wires2again", "Strike": true},
+                {"Text": "Black", "Target": "Wires2again", "Strike": true}
+            ]
+        },
+        "Wires2again": {
+            "Body": "<h3>Try Again</h3>",
+            "Choices": [
+                {"Text": "Blue", "Target": "Wires3"},
+                {"Text": "Red", "Target": "Wires2again", "Strike": true},
+                {"Text": "White", "Target": "Wires2again", "Strike": true},
+                {"Text": "Black", "Target": "Wires2again", "Strike": true}
+            ]
+        },
+        "Wires3": {
+            "Body": "<p>If the last wire is Black, cut the fourth wire.</p><p>Otherwise, if there is exactly one Red wire and there is more than one Yellow wire, cut the first wire.</p><p>Otherwise, if there are no Black wires, cut the second wire.</p><p>Otherwise, cut the first wire.</p>",
+            "Choices": [
+                {"Text": "Yellow", "Target": "Wires3again", "Strike": true},
+                {"Text": "White", "Target": "BombPanel", "Completed": true, "nodestatus": true, "wiresdone": true},
+                {"Text": "Blue", "Target": "Wires3again", "Strike": true},
+                {"Text": "Blue", "Target": "Wires3again", "Strike": true},
+                {"Text": "White", "Target": "Wires3again", "Strike": true}
+            ]
+        },
+        "Wires3again": {
+            "Body": "<h3>Try Again</h3>",
+            "Choices": [
+                {"Text": "Yellow", "Target": "Wires3again", "Strike": true},
+                {"Text": "White", "Target": "BombPanel", "Completed": true, "nodestatus": true, "wiresdone": true},
+                {"Text": "Blue", "Target": "Wires3again", "Strike": true},
+                {"Text": "Blue", "Target": "Wires3again", "Strike": true},
+                {"Text": "White", "Target": "Wires3again", "Strike": true}
+            ]
+        },
+        "Keypad": {
+            "Body": "<h3>Keypad Node</h3><p>Only one row below has all four of the symbols from the keypad</p><p>Press the position of the symbol that first appears in the corresponding column from left to right</p><h2>Ϙ Ѧ ƛ Ϟ Ѭ ϗ Ͽ</h2><h2>Ӭ Ϙ Ͽ Ҩ ☆ ϗ ¿</h2><h2>© Ѽ Ҩ Җ Ԇ ƛ ☆</h2><h2>б ¶ Ѣ Ѭ Җ ¿ ټ</h2> <h2>Ψ ټ Ѣ Ͼ ¶ Ѯ ★</h2> <h2>б Ӭ ҂ æ Ψ Ҋ Ω</h2>",
+            "Choices": [
+                {"Text": "Ѭ", "Target": "Keypad1", "Strike": true},
+                {"Text": "ټ", "Target": "Keypad1", "Strike": true},
+                {"Text": "Җ", "Target": "Keypad1", "Strike": true},
+                {"Text": "¶", "Target": "Keypad2"}
+            ]
+        },
+        "Keypad1": {
+            "Body": "<h3>Try Again</h3>",
+            "Choices": [
+                {"Text": "Ѭ", "Target": "Keypad1", "Strike": true},
+                {"Text": "ټ", "Target": "Keypad1", "Strike": true},
+                {"Text": "Җ", "Target": "Keypad1", "Strike": true},
+                {"Text": "¶", "Target": "Keypad2"}
+            ]
+        },
+        "Keypad2": {
+            "Body": "<h3></h3>",
+            "Choices": [
+                {"Text": "Ϙ", "Target": "Keypad3"},
+                {"Text": "Ͽ", "Target": "Keypad2again", "Strike": true},
+                {"Text": "¿", "Target": "Keypad2again", "Strike": true},
+                {"Text": "Ҩ", "Target": "Keypad2again", "Strike": true}
+            ]
+        },
+        "Keypad2again": {
+            "Body": "<h3>Try Again</h3>",
+            "Choices": [
+                {"Text": "Ϙ", "Target": "Keypad3"},
+                {"Text": "Ͽ", "Target": "Keypad2again", "Strike": true},
+                {"Text": "¿", "Target": "Keypad2again", "Strike": true},
+                {"Text": "Ҩ", "Target": "Keypad2again", "Strike": true}
+            ]
+        },
+        "Keypad3": {
+            "Body": "<h3></h3>",
+            "Choices": [
+                {"Text": "Ҩ", "Target": "BombPanel", "Completed": true, "nodestatus": true, "keypaddone": true},
+                {"Text": "Җ", "Target": "Keypad3again", "Strike": true},
+                {"Text": "Ԇ", "Target": "Keypad3again", "Strike": true},
+                {"Text": "☆", "Target": "Keypad3again", "Strike": true}
+            ]
+        },
+        "Keypad3again": {
+            "Body": "<h3>Try Again</h3>",
+            "Choices": [
+                {"Text": "Ҩ", "Target": "BombPanel", "Completed": true, "nodestatus": true, "keypaddone": true},
+                {"Text": "Җ", "Target": "Keypad3again", "Strike": true},
+                {"Text": "Ԇ", "Target": "Keypad3again", "Strike": true},
+                {"Text": "☆", "Target": "Keypad3again", "Strike": true}
+            ]
+        },
+        "Button": {
+            "Body": "<h3>Button Node</h3><p>There is a blue button that says Hold</p><p>If the button is Blue and the button says Abort, hold the button for a long time</p><p>If the button says Detonate, press and immediately release the button</p><p>If the button is White, hold the button for a long time</p><p>If the button is Yellow, hold the button for a short time</p><p>If the button is Red and the button says Hold, press and immediately release the button</p><p>If none of the above apply, hold the button for a short time</p>",
+            "Choices": [
+                {"Text": "Press", "Target": "Buttonagain", "Strike": true},
+                {"Text": "Short Hold", "Target": "BombPanel", "Completed": true, "nodestatus": true, "buttondone": true},
+                {"Text": "Long Hold", "Target": "Buttonagain", "Strike": true}
+            ]
+        },
+        "Buttonagain": {
+            "Body": "<h3>Try Again</h3>",
+            "Choices": [
+                {"Text": "Press", "Target": "Buttonagain", "Strike": true},
+                {"Text": "Short Hold", "Target": "BombPanel", "Completed": true, "nodestatus": true, "buttondone": true},
+                {"Text": "Long Hold", "Target": "Buttonagain", "Strike": true}
+            ]
+        },
+        "Win": {
+            "Body": "<p>You Defused the Bomb!</p><p>You Win!</p>"
+        },
+        "Lose": {
+            "Body": "<p>You've gained 3 strikes! The Bomb Exploded!</p><p>You loses :(</p>"
+        },
+        "CompletedBombpanel": {
+            "Body": "<h2>Bomb Panel</h2>",
+            "Choices": [
+                {"Text": "Defuse Bomb", "Target": "Win"}
+            ]
+        },
+        "Notcompleted": {
+            "Body": "<h3>You haven't defused the nodes</h3>",
+            "Choices": [
+                {"Text": "Bomb Panel", "Target": "BombPanel"}
+            ]
+        }
+    }
+}
